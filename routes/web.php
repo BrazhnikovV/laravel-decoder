@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,5 +17,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', static function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+Route::get('/user/{id}', [UserController::class, 'edit'])
+    ->middleware(['auth'])->name('user')->whereNumber('id');
+
+Route::get('/users', [UserController::class, 'list'])
+    ->middleware(['auth'])
+    ->name('users');
 
 require __DIR__.'/auth.php';
