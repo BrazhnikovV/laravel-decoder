@@ -18,11 +18,7 @@ Route::get('/', static function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/user/{id}', [UserController::class, 'edit'])
-    ->middleware(['auth'])->name('user')->whereNumber('id');
-
-Route::get('/users', [UserController::class, 'list'])
-    ->middleware(['auth'])
-    ->name('users');
+Route::resource('users', UserController::class)
+    ->middleware(['auth']);
 
 require __DIR__.'/auth.php';
