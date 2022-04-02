@@ -18,6 +18,10 @@ Route::get('/', static function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+Route::get('/converting', static function () {
+    return view('converting.index');
+})->middleware(['auth'])->name('converting');
+
 Route::resource('users', UserController::class)
     ->middleware(['auth']);
 
