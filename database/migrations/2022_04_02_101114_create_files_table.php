@@ -11,11 +11,23 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('files', function (Blueprint $table) {
-            $table->id();
+        Schema::create('files', static function (Blueprint $table) {
+            $table->id()->autoIncrement()->unsigned();
+            $table->string('name', 255)
+                ->nullable(false)
+                ->comment('Название файла');
+            $table->string('path', 255)
+                ->nullable(false)
+                ->comment('Путь к файлу');
+            $table->integer('user_id')
+                ->unsigned()
+                ->nullable(false)
+                ->comment('Идентификатор пользователя');
             $table->timestamps();
+
+            $table->index(['user_id']);
         });
     }
 
@@ -24,7 +36,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('files');
     }
