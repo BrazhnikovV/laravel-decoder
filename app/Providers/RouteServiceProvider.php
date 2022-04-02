@@ -20,6 +20,13 @@ class RouteServiceProvider extends ServiceProvider
     public const HOME = '/';
 
     /**
+     * The path to the "users" route for your application.
+     *
+     * @var string
+     */
+    public const USER_LIST = '/users';
+
+    /**
      * Define your route model bindings, pattern filters, etc.
      *
      * @return void

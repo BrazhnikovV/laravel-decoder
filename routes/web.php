@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,5 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', static function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+Route::resource('users', UserController::class)
+    ->middleware(['auth']);
 
 require __DIR__.'/auth.php';
