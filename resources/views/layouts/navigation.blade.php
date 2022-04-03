@@ -15,10 +15,10 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="url('/users')" :active="request()->route()->action['as'] === 'users.index'">
+                    <x-nav-link :href="url('/users')" :active="request()->routeIs('users.index')">
                         {{ __('Users') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('converting')" :active="request()->routeIs('converting')">
+                    <x-nav-link :href="url('/converting')" :active="request()->routeIs('converting')">
                         {{ __('Converter') }}
                     </x-nav-link>
                 </div>

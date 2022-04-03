@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Converter\FileUploadController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,11 +19,13 @@ Route::get('/', static function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/converting', static function () {
-    return view('converting.index');
-})->middleware(['auth'])->name('converting');
-
 Route::resource('users', UserController::class)
+    ->middleware(['auth']);
+
+Route::get('/converting', [FileUploadController::class, 'index'])
+    ->middleware(['auth'])->name('converting');
+
+Route::post('store', [FileUploadController::class, 'store'])
     ->middleware(['auth']);
 
 require __DIR__.'/auth.php';
