@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Models\User;
+use App\Repositories\Eloquent\Converter\FileRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
@@ -16,6 +17,13 @@ use App\Providers\RouteServiceProvider;
  */
 class UserController extends Controller
 {
+    private FileRepositoryInterface $fileRepository;
+
+    public function __construct(FileRepositoryInterface $fileRepository)
+    {
+        $this->fileRepository = $fileRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -23,6 +31,8 @@ class UserController extends Controller
      */
     public function index(): View
     {
+        $files = $this->fileRepository->all();
+
         return view('users.list', [
             'users' => DB::table('users')->paginate(2)
         ]);
